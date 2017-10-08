@@ -1,18 +1,21 @@
-ChitChat client starter projekt
+Projekt ChitChat client - Programiranje 2
 -------------------------------
 
-Ta projekt vam je lahko v pomoč pri izdelavi ChitChat clienta pri predmetu Programiranje 2.
+Navodila za uporabo spletne klepetalnice:
 
-Namesto, da bi knjižnice uvažali sami, bomo uporabili za to namenjeno orodje Maven.
-Več informacij o tem si poiščite sami.
+PRIJAVA
+-	Prijavite se s klikom na gumb prijava.
+-	Za pošiljanje sporočil morate biti prijavljeni. 
+-	Če želite poslati sporočilo, ga vnesite v polje za vnos ter kliknite 'enter' ali kliknite gumb za pošiljanje.
+-	Prijavljena je lahko samo ena oseba naenkrat. Če je nekdo prijavljen, se mora odjaviti, da se lahko prijavi drug uporabnik.
+ODJAVA
+-	Odjavite se s klikom na gumb odjava ali tako, da zaprete okno klepetalnice.
+-	Ko se odjavite, se vse nastavitve ponastavijo; privzeta velikost pisave, črna barva pisave, prejemnik,…
+MOŽNE NASTAVITVE
+-	Izbirate lahko med veliko ter privzeto velikostjo pisave.
+-	Izbirate lahko med črno ter rdečo barvo pisave. 
+-	Če želite poslati zasebno sporočilo, vnesite določenega prejemnika.
 
-Navodila za uporabo:
-1. V GitHubu naredite fork tega projekt
-2. V Eclipse uvozite prej narejen fork (Import -> Git -> Clone)
-3. Projekt pretvorite v maven projekt (desni klik na ime projekta --> Configure --> Convert to Maven project...)
 
-Nastavitve projekta so shranjene v pom.xml, tam lahko nastavite ime projekta, v elementu dependencies pa vidite katere knjižnice bomo uporabljali.
-Ostane vam le še, da preimenujete java package my.group.chitchat v svojega (npr. si.lodrant.chitchat).
 
-Če vam je vse uspelo, lahko zaženete razred App.
 
