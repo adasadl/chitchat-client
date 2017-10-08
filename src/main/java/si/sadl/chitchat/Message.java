@@ -27,19 +27,9 @@ public class Message {
 		this.text = text;
 	}
 
-	//public Message(boolean global, String recipient, String sender, String text, Date sent_at) {
-		//this.global = global;
-		//this.recipient = recipient;
-		//this.sender = sender;
-		//this.text = text;
-		//this.sent_at = sent_at;
-	//}
-
 	@Override
 	public String toString() {
 		return (text + "\n" + sent_at);
-		//return "[global=" + global + ", recipient=" + recipient + ", sender=" + sender + ", text=" + text + ", sent_at="
-				//+ sent_at + "]";
 	}
 
 	@JsonProperty("global")

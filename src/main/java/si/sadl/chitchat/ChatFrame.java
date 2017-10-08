@@ -42,6 +42,9 @@ import com.oracle.webservices.internal.api.EnvelopeStyle.Style;
 
 public class ChatFrame extends JFrame implements ActionListener, KeyListener {
 	
+	/**
+	 * 
+	 */
 	private JTextPane output;
 	private JTextField input;
 	private JTextField vnos;
@@ -73,7 +76,7 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
 		
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //ko zapremo okno za klepetanje, se program neha izvajati
 		
-		this.setSize(new Dimension(400, 400));
+		//this.setSize(new Dimension(400, 400));
 		
 		addWindowListener(new WindowAdapter() { 		//ko zapremo okno nas sistem avtomatsko odjavi
           @Override
@@ -83,13 +86,13 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
               }
               e.getWindow().dispose();
           }
-      });
+		});
 		
 		//OUTPUT
 		this.output = new JTextPane();
 		this.doc = this.output.getStyledDocument();
-      
-		//this.output.setEditable(false);
+     
+		this.output.setEditable(false);
 		JScrollPane scrollpane = new JScrollPane(output);
 		GridBagConstraints outputConstraint = new GridBagConstraints();
 		outputConstraint.weightx = 1.0;
@@ -97,9 +100,7 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
 		outputConstraint.fill = GridBagConstraints.BOTH;
 		outputConstraint.gridx = 0;
 		outputConstraint.gridy = 1;
-		//FontMetrics metrics = this.output.getFontMetrics(this.output.getFont());
-	    //this.output.setMargin(new Insets(scrollpane.getViewport().getHeight()
-	      //  - metrics.getHeight(), 10, 10, 10));
+		outputConstraint.insets = new Insets(0, 10, 0, 10);
 		pane.add(scrollpane, outputConstraint);
 		
 		
@@ -111,7 +112,7 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
 		inputConstraint.gridx = 0;
 		inputConstraint.gridy = 4;
 		inputConstraint.fill = GridBagConstraints.HORIZONTAL;
-		//inputConstraint.insets = new Insets(10, 7, 10, 7);
+		inputConstraint.insets = new Insets(0, 10, 0, 10);
 		pane.add(input,  inputConstraint);
 		input.addKeyListener(this);
 		
@@ -144,7 +145,7 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
 		posiljatelj_input_gbc.gridx = 0;
 		posiljatelj_input_gbc.gridy = 2;
 		posiljatelj_input_gbc.fill = GridBagConstraints.HORIZONTAL;
-		//posiljatelj_input_gbc.insets = new Insets (10, 10, 10, 10);
+		posiljatelj_input_gbc.insets = new Insets (0, 10, 0, 10);
 		pane.add(polje_prejemnika, posiljatelj_input_gbc);
 		prejemnik_input.addKeyListener(this);
 	
@@ -154,7 +155,7 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
 		GridBagConstraints gbc_gumbPrijava = new GridBagConstraints();
 		gbc_gumbPrijava.insets = new Insets(5, 5, 5, 5);
 		gbc_gumbPrijava.gridx = 1;
-		//gbc_gumbPrijava.gridy = 0;
+		gbc_gumbPrijava.gridy = 0;
 		gbc_gumbPrijava.anchor = GridBagConstraints.WEST;
 		pane.add(prijava, gbc_gumbPrijava);
 		prijava.addActionListener(this);
@@ -179,20 +180,32 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
 		pane.add(poslji, gbc_poslji);
 		poslji.addActionListener(this);
 		
-		//VELIKOST PISAVE
-		this.velikost_pisave = new JButton("Večja pisava");
-		GridBagConstraints gbc_velikost_pisave = new GridBagConstraints();
-		//gbc_velikost_pisave.gridx = 0;
-		gbc_velikost_pisave.gridy = 6;
-		gbc_velikost_pisave.anchor = GridBagConstraints.WEST;
-		gbc_velikost_pisave.insets = new Insets(10, 10, 10, 10);
-		pane.add(velikost_pisave, gbc_velikost_pisave);
-		velikost_pisave.addActionListener(this);
+		//ČRNA PISAVA
+		this.crna_pisava = new JButton("Črna pisava");
+		GridBagConstraints gbc_crna_pisava = new GridBagConstraints();
+		gbc_crna_pisava.insets = new Insets(10, 10, 10, 10);
+		gbc_crna_pisava.gridx = 0;
+		gbc_crna_pisava.gridy = 5;
+		gbc_crna_pisava.anchor = GridBagConstraints.WEST;
+		pane.add(crna_pisava, gbc_crna_pisava);
+		this.crna_pisava.setBackground(Color.YELLOW);
+		crna_pisava.addActionListener(this);
+		
+		//RDEČA PISAVA
+		this.rdeca_pisava = new JButton("Rdeča pisava");
+		this.rdeca_pisava.setForeground(Color.RED);
+		GridBagConstraints gbc_gumb_rdeca_pisava = new GridBagConstraints();
+		gbc_gumb_rdeca_pisava.gridx = 0;
+		gbc_gumb_rdeca_pisava.gridy = 6;
+		gbc_gumb_rdeca_pisava.anchor = GridBagConstraints.WEST;
+		gbc_gumb_rdeca_pisava.insets = new Insets(10, 10, 10, 10);
+		pane.add(rdeca_pisava, gbc_gumb_rdeca_pisava);
+		rdeca_pisava.addActionListener(this);
 		
 		//PRIVZETA PISAVA
 		this.privzeta_velikost_pisave = new JButton("Privzeta velikost pisave");
 		GridBagConstraints gbc_privzeta_velikost_pisave = new GridBagConstraints();
-		//gbc_privzeta_velikost_pisave.gridx = 0;
+		gbc_privzeta_velikost_pisave.gridx = 0;
 		gbc_privzeta_velikost_pisave.gridy = 7;
 		gbc_privzeta_velikost_pisave.anchor = GridBagConstraints.WEST;
 		gbc_privzeta_velikost_pisave.insets = new Insets(10, 10, 10, 10);
@@ -200,28 +213,15 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
 		this.privzeta_velikost_pisave.setBackground(Color.YELLOW);
 		privzeta_velikost_pisave.addActionListener(this);
 		
-		//RDEČA PISAVA
-		this.rdeca_pisava = new JButton("Rdeča pisava");
-		this.rdeca_pisava.setForeground(Color.RED);
-		GridBagConstraints gbc_gumb_rdeca_pisava = new GridBagConstraints();
-		gbc_gumb_rdeca_pisava.gridx = 0;
-		gbc_gumb_rdeca_pisava.gridy = 8;
-		gbc_gumb_rdeca_pisava.anchor = GridBagConstraints.WEST;
-		gbc_gumb_rdeca_pisava.insets = new Insets(10, 10, 10, 10);
-		pane.add(rdeca_pisava, gbc_gumb_rdeca_pisava);
-		rdeca_pisava.addActionListener(this);
-
-		
-		//ČRNA PISAVA
-		this.crna_pisava = new JButton("Črna pisava");
-		GridBagConstraints gbc_crna_pisava = new GridBagConstraints();
-		gbc_crna_pisava.insets = new Insets(10, 10, 10, 10);
-		//gbc_crna_pisava.gridx = 0;
-		gbc_crna_pisava.gridy = 5;
-		gbc_crna_pisava.anchor = GridBagConstraints.WEST;
-		pane.add(crna_pisava, gbc_crna_pisava);
-		this.crna_pisava.setBackground(Color.YELLOW);
-		crna_pisava.addActionListener(this);
+		//VEČJA PISAVA
+		this.velikost_pisave = new JButton("Večja pisava");
+		GridBagConstraints gbc_velikost_pisave = new GridBagConstraints();
+		gbc_velikost_pisave.gridx = 0;
+		gbc_velikost_pisave.gridy = 8;
+		gbc_velikost_pisave.anchor = GridBagConstraints.WEST;
+		gbc_velikost_pisave.insets = new Insets(10, 10, 10, 10);
+		pane.add(velikost_pisave, gbc_velikost_pisave);
+		velikost_pisave.addActionListener(this);
 
 		
 		//NAVODILA
@@ -244,23 +244,14 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
 				+ " Za pošiljanje sporočil se morate prijaviti.");
 		
 		Font font1 = new Font("SansSerif", Font.BOLD, 12);
-		this.navodila.setFont(font1);
-		
-		//this.input.requestFocus();
-		//this.input.requestFocusInWindow();
-		
-      //getContentPane().add(pane);
-
-      //pack();
-      //setVisible(true);  
-		
+		this.navodila.setFont(font1);		
 	}
 	
-
 	/**
 	 * @param person - the person sending the message
 	 * @param message - the message content
 	 */
+	
 	public void addMessage(boolean global, String person, String message)throws BadLocationException {
 		App.SendMessage(global, person, this.prejemnik_input.getText(), message);
 		SimpleAttributeSet set = new SimpleAttributeSet();
@@ -269,16 +260,12 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
 		} else {
 			StyleConstants.setForeground(set, Color.black);
 		}
-	    //StyleConstants.setBackground(set, Color.blue);
-	    //Document doc = pane.getStyledDocument();
 	    this.doc.insertString(doc.getLength(), person + ": " + message + "\n", set);
-		//appendToPane(this.output, chat + person + ": " + message + "\n", Color.RED);
 	}
 	
 	public void addMessageRobot(String person, String message)throws BadLocationException{
 		SimpleAttributeSet set = new SimpleAttributeSet();
 	    StyleConstants.setForeground(set, Color.blue);
-		//App.SendMessage(global, person, this.prejemnik_input.getText(), message);
 		this.doc.insertString(doc.getLength(), person + ": " + message + "\n", set);
 	}
 	
@@ -322,9 +309,9 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
 				this.privzeta_velikost_pisave.setBackground(Color.YELLOW);
 				this.rdeca_pisava.setBackground(null);
 				this.crna_pisava.setBackground(Color.YELLOW);
-			App.prijava(this.uporabnik);
-			this.prijavljen = true;
-			this.navodila.setText(" Dobrodošli v spletni klepetalnici! \n \n Prijavljen je: " + this.uporabnik + ".");
+				App.prijava(this.uporabnik);
+				this.prijavljen = true;
+				this.navodila.setText(" Dobrodošli v spletni klepetalnici! \n \n Prijavljen je: " + this.uporabnik + ".");
 			}
 		} else if (e.getSource() == this.prijava) {	//se prijaviš z vzdevkom
 			if (this.prijavljen == false){
@@ -337,12 +324,12 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
 				this.privzeta_velikost_pisave.setBackground(Color.YELLOW);
 				this.rdeca_pisava.setBackground(null);
 				this.crna_pisava.setBackground(Color.YELLOW);
-			this.uporabnik = this.vnos.getText();
-			App.prijava(this.uporabnik);
-			this.prijavljen = true;
-			this.navodila.setText(" Dobrodošli v spletni klepetalnici! \n \n Prijavljen je: " + this.uporabnik + ".");
+				this.uporabnik = this.vnos.getText();
+				App.prijava(this.uporabnik);
+				this.prijavljen = true;
+				this.navodila.setText(" Dobrodošli v spletni klepetalnici! \n \n Prijavljen je: " + this.uporabnik + ".");
 			}
-		} else if (e.getSource() == this.odjava) { //se odjaviš
+		} else if (e.getSource() == this.odjava) { 		//se odjaviš
 			Font font1 = new Font("SansSerif", Font.PLAIN, 12);
 			this.input.setFont(font1);
 			this.output.setFont(font1);
@@ -357,6 +344,7 @@ public class ChatFrame extends JFrame implements ActionListener, KeyListener {
 			this.vnos.setText("");
 			this.uporabnik = System.getProperty("user.name");
 			this.prejemnik_input.setText("");
+			this.output.setText("");
 			this.navodila.setText(" Dobrodošli v spletni klepetalnici! \n \n Niste prijavljeni. \n Za pošiljanje sporočil se morate prijaviti.");
 		} else if (e.getSource() == this.rdeca_pisava) {
 			this.input.setForeground(Color.RED);

@@ -39,11 +39,7 @@ public class PrimeRobot extends TimerTask {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-		
-		}
-		
-		
-		
+			}	
+		}	
 	}
 }
