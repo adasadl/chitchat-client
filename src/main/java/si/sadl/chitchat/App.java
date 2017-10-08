@@ -94,14 +94,21 @@ public class App {
 	return messages;
     }
    
-    public static void SendMessage(boolean global, String posiljatelj, String prejemnik, String sporocilo){
+    public static void SendMessage(boolean global, String posiljatelj, String prejemnik, String vsebina){
 		URI uri;
 		ObjectMapper mapper = new ObjectMapper();
 		String responseBody = null;
 		try {
 			uri = new URIBuilder("http://chitchat.andrej.com/messages").addParameter("username", posiljatelj).build();
-						  String jsonMessage = mapper.writeValueAsString(new Message(global, prejemnik, sporocilo));
-			  responseBody = Request.Post(uri)
+			Message sporocilo = new Message();
+			if (global) {
+				sporocilo = new Message(posiljatelj, vsebina);
+			}
+			else {
+				sporocilo = new Message(posiljatelj, prejemnik, vsebina);
+			}
+			String jsonMessage = mapper.writeValueAsString(sporocilo);
+			responseBody = Request.Post(uri)
 			          .bodyString(jsonMessage, ContentType.APPLICATION_JSON)
 			          .execute()
 			          .returnContent()

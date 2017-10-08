@@ -2,22 +2,20 @@ package si.sadl.chitchat;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.io.IOException;
+import java.net.URISyntaxException;
+
+import org.apache.http.client.ClientProtocolException;
+
+//import javax.swing.text.BadLocationException;
 
 public class PrimeRobot extends TimerTask {
 	private ChatFrame chat;
-	private int k;
 	
-	private static boolean isPrime(int n) {
-		for (int i = 2; i * i <= n; i++) {
-			if (n % i == 0) { return false; }
-		}
-		return true;
-	}
-
 	public PrimeRobot(ChatFrame chat) {
 		this.chat = chat;
-		this.k = 2;
 	}
+
 
 	/**
 	 * Activate the robot!
@@ -29,9 +27,23 @@ public class PrimeRobot extends TimerTask {
 	
 	@Override
 	public void run() {
-		if (isPrime(this.k)) {
-			chat.addMessage(true, "primer", Integer.toString(this.k) + " is prime");
+		if (chat.prijavljen) {
+			try {
+				chat.receiveMessage();
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (URISyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
 		}
-		this.k++;
+		
+		
+		
 	}
 }
